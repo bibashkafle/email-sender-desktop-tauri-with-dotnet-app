@@ -1,0 +1,58 @@
+<app-menubar></app-menubar>
+
+<div class="mt-2 mx-auto width-80">
+
+    <p-panel header="Send An Email" [toggleable]="false">
+        <form [formGroup]="emailForm" (ngSubmit)="onFormsubmit()">
+            <div class="form-group">
+                <label for="txtFeature" class="form-label">Subject</label>
+                <div class="input-group mb-3">                   
+                    <input type="text" class="form-control" formControlName="subject" placeholder="Enter Subject">
+                    <button class="input-group-text btn btn-danger" [disabled]="askUserCredential() === false">Send</button>
+                </div>
+            </div>
+            <div class="form-group"><br>
+                <button type="button" class="btn btn-secondary" (click)="selectReceiverListFile()">
+                    {{this.emailForm.get("emailTo")?.value? this.emailForm.get("emailTo")?.value: "Choose Email-To file…"}} 
+                </button>       
+            </div>
+            <div class="form-group"><br>
+                <button type="button" class="btn btn-secondary" (click)="selectAttachementFiles()">
+                    {{this.emailForm.get("attachments")?.value? this.emailForm.get("attachments")?.value: "Choose attachement file(s)"}}
+                </button>       
+            </div><br>
+            <div class="form-group">
+                <label for="txtScenarioOutLine" class="form-label">Email Body</label>
+                <p-editor formControlName="emailBody" [style]="{'height':'320px'}"></p-editor>
+            </div>         
+        </form>
+     
+        <p-dialog [style]="{ width: '40vw' }" header="Message" [modal]="true" [(visible)]="showOutPutDialog">
+            <p> {{sideCarOutput}} </p>
+        </p-dialog>
+      
+        <p-dialog [style]="{ width: '40vw' }" header="User Credential" [modal]="true" [(visible)]="showPasswordDialogBox">
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Display name" aria-label="sender's Display Name" [(ngModel)]="displayName">
+                  </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="User name" aria-label="sender's User Name" [(ngModel)]="userName">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Enter your password for {{userName}}" aria-label="sender's Email Password" [(ngModel)]="userPassword">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <button type="button" class="btn btn-primary" (click)="sendEmail()" [disabled]="allowToSend() === false">
+                       Send Email
+                    </button>    
+                  </div>
+        </p-dialog>
+    </p-panel>
+</div>
+
+
+  

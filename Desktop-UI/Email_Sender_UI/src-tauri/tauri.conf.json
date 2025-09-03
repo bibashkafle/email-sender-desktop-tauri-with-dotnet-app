@@ -1,0 +1,78 @@
+{
+  "build": {
+    "beforeDevCommand": "yarn start --port 4200",
+    "beforeBuildCommand": "yarn prod",
+    "devPath": "http://localhost:4200",
+    "distDir": "../dist/email_sender_ui",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "email_sender_ui",
+    "version": "0.0.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true,
+        "sidecar": true,
+        "scope": [{ "name": "banaries/Email-Sender", "sidecar": true, "args": true }]
+      },
+      "fs": {
+        "all": false,
+        "writeFile": true,
+        "createDir": true,
+        "scope": ["$APPLOCALDATA/**","$RESOURCE/**"]
+      },
+      "dialog": {
+        "all": false,
+        "open": true
+      },
+      "path": {
+        "all": true
+      },
+      "window": {
+        "show": true,
+        "create": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.cansofttech.emailsender",
+      "targets": "all",
+      "externalBin": [
+        "banaries/Email-Sender"
+      ],
+      "windows": {
+        "webviewInstallMode": {
+          "type": "embedBootstrapper"
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "label": "main",
+        "title": "Email Sender",
+        "url": "index.html",
+        "width": 800,
+        "height": 600
+      }  
+    ]
+  }
+}

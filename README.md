@@ -1,3 +1,3 @@
 # Email sender Desktop app
 
-This Application use tauri + angular and .net binary in side car to send and email in bluk.
+This application uses Tauri with Angular for the frontend, and a .NET binary running as a sidecar to send bulk emails.
